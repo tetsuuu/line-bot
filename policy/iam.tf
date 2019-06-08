@@ -23,6 +23,11 @@ resource "aws_iam_role" "lambda-dynamodb" {
   assume_role_policy = "${file("./policy/iam_assumelambda.json")}"
 }
 
+resource "aws_iam_policy" "lambda-dynamodb" {
+  name = "Lambda_DynamoDB"
+  policy = "${file("./policy/Lambda_Readnly_DynamoDB.json")}"
+}
+
 resource "aws_iam_role_policy_attachment" "lambda-dynamodb-basic-attach" {
   role       = "${aws_iam_role.lambda-dynamodb}"
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
@@ -30,5 +35,5 @@ resource "aws_iam_role_policy_attachment" "lambda-dynamodb-basic-attach" {
 
 resource "aws_iam_role_policy_attachment" "lambda-dynamodb-read-attach" {
   role       = "${aws_iam_role.lambda-dynamodb}"
-  policy_arn = "${file("./policy/Lambda_Readnly_DynamoDB.json")}"
+  policy_arn = "${aws_iam_policy.lambda-dynamodb.arn}"
 }
