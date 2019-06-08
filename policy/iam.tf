@@ -28,7 +28,7 @@ resource "aws_iam_role_policy_attachment" "lambda-dynamodb-basic-attach" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
-resource "aws_iam_role_policy_attachment" "lambda-dynamodb-basic-attach" {
+resource "aws_iam_role_policy_attachment" "lambda-dynamodb-read-attach" {
   role       = "${aws_iam_role.lambda-dynamodb}"
   policy_arn = "${file("./policy/Lambda_Readnly_DynamoDB.json")}"
 }
