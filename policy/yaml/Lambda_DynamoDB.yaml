@@ -1,0 +1,43 @@
+Type: AWS::IAM::Role
+Properties:
+  AssumeRolePolicyDocument:
+    Version: "2012-10-17",
+    Statement:
+     -
+      Effect: "Allow"
+      Principal:
+        Service:
+        - "lambda.amazonaws.com"
+      Action:
+        - "sts:AssumeRole"
+  ManagedPolicyArns:
+    - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  Policies:
+    -
+      PolicyName: "LambdaReadDynamoDB"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action:
+              - "dynamodb:BatchGetItem"
+                "dynamodb:ConditionCheckItem"
+                "dynamodb:Scan"
+                "dynamodb:ListTagsOfResource"
+                "dynamodb:Query"
+                "dynamodb:DescribeStream"
+                "dynamodb:DescribeTimeToLive"
+                "dynamodb:ListStreams"
+                "dynamodb:DescribeGlobalTableSettings"
+                "dynamodb:DescribeReservedCapacityOfferings"
+                "dynamodb:DescribeTable"
+                "dynamodb:GetShardIterator"
+                "dynamodb:DescribeGlobalTable"
+                "dynamodb:DescribeReservedCapacity"
+                "dynamodb:GetItem"
+                "dynamodb:DescribeContinuousBackups"
+                "dynamodb:DescribeBackup"
+                "dynamodb:DescribeLimits"
+                "dynamodb:GetRecords"
+            Resource: "*"
+  RoleName: Lambda_DynamoDB
